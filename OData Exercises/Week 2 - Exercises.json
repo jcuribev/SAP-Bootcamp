@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "33f7c93a-8de8-44f9-817d-c30943c03b44",
+		"name": "Week 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25724656"
+	},
+	"item": [
+		{
+			"name": "Base Example",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json&expand=Supplier\n",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "expand",
+							"value": "Supplier\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "0. metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1. Order Client Detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Orders?$format=json&expand=Customer",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Orders"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "expand",
+							"value": "Customer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Employees under manager 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Employees?select=ReportsTo eq 2",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Employees"
+					],
+					"query": [
+						{
+							"key": "select",
+							"value": "ReportsTo eq 2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Stock >= 0",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$filter=UnitsInStock gt 0",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "UnitsInStock gt 0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Product ID, name and empty stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json&$select=ProductName,ProductID&$filter=UnitsInStock eq 0",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$select",
+							"value": "ProductName,ProductID"
+						},
+						{
+							"key": "$filter",
+							"value": "UnitsInStock eq 0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Top 5 most expensive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json&$orderby=UnitPrice desc&$top=5",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$orderby",
+							"value": "UnitPrice desc"
+						},
+						{
+							"key": "$top",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Delivered to Germany",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Orders?$format=json&$filter=ShipCountry eq ('Germany')",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Orders"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$filter",
+							"value": "ShipCountry eq ('Germany')"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Name, price of Beverages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json&$select=ProductName,UnitPrice&$filter=CategoryID eq 1",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$select",
+							"value": "ProductName,UnitPrice"
+						},
+						{
+							"key": "$filter",
+							"value": "CategoryID eq 1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.1. Name, price of Beverages (ALT)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/northwind/northwind.svc/Products?$format=json&$select=ProductName,UnitPrice&$expand=Category&$filter=Category/CategoryName eq 'Beverages'\n",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"northwind",
+						"northwind.svc",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						},
+						{
+							"key": "$select",
+							"value": "ProductName,UnitPrice"
+						},
+						{
+							"key": "$expand",
+							"value": "Category"
+						},
+						{
+							"key": "$filter",
+							"value": "Category/CategoryName eq 'Beverages'\n"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
