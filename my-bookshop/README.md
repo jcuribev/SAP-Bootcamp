@@ -1,4 +1,4 @@
-# Welcome to the Learning Journey "Getting Started with the SAP Cloud Application Programming Model"
+# Bookshop project
 
 This project documents my journey through the SAP Cloud Application Programming Model tutorial.
 
