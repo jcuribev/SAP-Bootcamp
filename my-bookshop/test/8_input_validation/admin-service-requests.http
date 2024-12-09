@@ -1,0 +1,52 @@
+@baseUrl = http://localhost:4004
+
+
+
+###
+POST {{baseUrl}}/admin/Authors
+Content-Type: application/json
+
+{
+  "name": "",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1805-05-09",  
+  "epoch": {"ID": 190}
+}
+
+
+###
+POST {{baseUrl}}/admin/Books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author_ID": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "genre": 3
+}
+
+
+###
+POST {{baseUrl}}/admin/Books
+Content-Type: application/json
+
+{
+  "title": "",
+  "genre": 3
+}
+
+
+###
+# @name getShakespeare
+GET {{baseUrl}}/admin/Authors?$filter=name eq 'William Shakespeare'
+
+@authorID = {{getShakespeare.response.body.$.value[0].ID}}
+
+###
+
+POST {{baseUrl}}/admin/Books
+Content-Type: application/json
+
+{
+  "title": "Macbeth",
+  "author_ID": "{{authorID}}"
+}

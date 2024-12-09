@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:4004
+
+
+
+###
+POST {{baseUrl}}/admin/Authors
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1705-05-09", 
+  "epoch": {"ID": 120}
+}

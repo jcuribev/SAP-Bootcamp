@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:4004
+
+
+
+### 
+GET {{baseUrl}}/admin/$metadata
+
+
+### 
+GET {{baseUrl}}/admin/Books?$expand=author
+
+
+### 
+GET {{baseUrl}}/admin/Authors?$expand=books
+
+
+### 
+# @name getShakespeare
+GET {{baseUrl}}/admin/Authors?$filter=name eq 'William Shakespeare'
+
+###
+@authorID = {{getShakespeare.response.body.$.value[0].ID}}
+
+GET  {{baseUrl}}/admin/Authors({{authorID}})/books

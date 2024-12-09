@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:4004
+
+
+
+###
+GET {{baseUrl}}/cat
+
+
+###
+GET {{baseUrl}}/cat/$metadata
+
+
+###
+GET {{baseUrl}}/cat/Books
+Accept-Language: en
+
+
+###
+GET {{baseUrl}}/cat/Books
+Accept-Language: de
+
+
+###
+GET {{baseUrl}}/cat/Authors
+Accept-Language: en
+
+
+###
+GET {{baseUrl}}/cat/Authors
+Accept-Language: de
+
+
+###
+POST {{baseUrl}}/cat/Authors
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1805-05-09",
+  "epoch": {"ID": 120}
+}

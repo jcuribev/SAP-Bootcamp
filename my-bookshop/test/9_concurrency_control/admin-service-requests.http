@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:4004
+
+
+
+
+###
+# @name createNewAuthor
+POST {{baseUrl}}/admin/Authors
+Content-Type: application/json
+
+{
+  "name": "Initial Version"
+}
+
+###
+@authorID = {{createNewAuthor.response.body.$.ID}}
+
+
+
+###
+GET {{baseUrl}}/admin/Authors({{authorID}})
+
+###
+@ETag1 = {{createNewAuthor.response.headers.ETag}}
+
+
+
+###
+GET {{baseUrl}}/admin/Authors({{authorID}})
+
+###
+@ETag2 = {{createNewAuthor.response.headers.ETag}}
+
+
+
+
+###
+PUT {{baseUrl}}/admin/Authors({{authorID}})
+If-Match: {{ETag1}}
+Content-Type: application/json
+
+{
+  "name": "Update 1 of Initial Version"
+}
+
+
+
+###
+PUT {{baseUrl}}/admin/Authors({{authorID}})
+If-Match: {{ETag2}}
+Content-Type: application/json
+
+{
+  "name": "Update 2 of Initial Version"
+}

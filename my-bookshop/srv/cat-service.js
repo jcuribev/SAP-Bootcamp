@@ -1,21 +1,53 @@
-module.exports = (srv) => {
-  const { Books } = cds.entities('my.bookshop')
+const cds = require('@sap/cds')
 
-  // Reduce stock of ordered books
-  srv.before('CREATE', 'Orders', async (req) => {
-    const order = req.data
-    if (!order.amount || order.amount <= 0) return req.error(400, 'Order at least 1 book')
-    const tx = cds.transaction(req)
-    const affectedRows = await tx.run(
-      UPDATE(Books)
-        .set({ stock: { '-=': order.amount } })
-        .where({ stock: { '>=': order.amount }, /*and*/ ID: order.book_ID })
-    )
-    if (affectedRows === 0) req.error(409, 'Sold out, sorry')
-  })
+class CatalogService extends cds.ApplicationService {
+  init() {
+    const { Books } = this.entities
 
-  // Add some discount for overstocked books
-  srv.after('READ', 'Books', (each) => {
-    if (each.stock > 111) each.title += ' -- 11% discount!'
-  })
+    this.after('READ', Books, this.grantDiscount)
+
+    this.on('submitOrder', this.reduceStock)
+
+    return super.init()
+  }
+
+  grantDiscount(results) {
+    for (let b of results) {
+      if (b.stock > 200) {
+        b.title += ' -- 11% Discount!'
+      }
+    }
+  }
+
+  async reduceStock(req) {
+    const { Books } = this.entities
+    const { book, quantity } = req.data
+
+    if (quantity < 1) {
+      return req.error('INVALID_QUANTITY')
+    }
+
+    const b = await SELECT.one
+      .from(Books)
+      .where({ ID: book })
+      .columns((b) => {
+        b.stock
+      })
+
+    if (!b) {
+      return req.error('BOOK_NOT_FOUND', [book])
+    }
+
+    let { stock } = b
+    if (quantity > stock) {
+      return req.error('ORDER_EXCEEDS_STOCK', [quantity, stock, book])
+    }
+
+    await UPDATE(Books)
+      .where({ ID: book })
+      .with({ stock: { '-=': quantity } })
+    return { stock: stock - quantity }
+  }
 }
+
+module.exports = CatalogService

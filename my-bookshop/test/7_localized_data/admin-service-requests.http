@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:4004
+
+
+
+### 
+GET {{baseUrl}}/admin
+
+
+### 
+GET {{baseUrl}}/admin/$metadata
+
+
+### 
+
+GET {{baseUrl}}/admin/Books?$expand=publCountry,price_currency
+Accept-Language: en
+
+
+### 
+
+GET {{baseUrl}}/admin/Books?$expand=publCountry,price_currency
+Accept-Language: de
+
+
+### 
+
+GET {{baseUrl}}/admin/Authors?$expand=epoch
+Accept-Language: en
+
+
+### 
+
+GET {{baseUrl}}/admin/Authors?$expand=epoch
+Accept-Language: de

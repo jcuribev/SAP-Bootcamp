@@ -1,0 +1,167 @@
+@baseUrl = http://localhost:4004
+
+###
+GET {{baseUrl}}/cat/Books
+
+
+###
+GET {{baseUrl}}/cat/Authors
+
+
+###
+POST {{baseUrl}}/cat/Authors
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1805-05-09",
+  "epoch": {"ID": 120}
+}
+
+
+###
+# @name getShakespeare
+GET {{baseUrl}}/cat/Authors?$filter=name eq 'William Shakespeare'
+
+###
+@authorID = {{getShakespeare.response.body.$.value[0].ID}}
+
+
+###
+POST {{baseUrl}}/cat/Books
+Content-Type: application/json
+
+{
+  "title": "Test Title",
+  "author": { "ID": "{{authorID}}" }
+}
+
+
+
+###
+# Retrieve the ID of the book with the title 'Faust'
+# This ID is used to call the submitOrder action of the catalog service
+# @name getBookID
+GET {{baseUrl}}/cat/Books?$filter=title eq 'Faust'
+
+###
+@bookID = {{getBookID.response.body.$.value[0].ID}}
+
+
+###
+POST {{baseUrl}}/cat/submitOrder
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 2
+}
+
+
+###
+POST {{baseUrl}}/cat/submitOrder
+Authorization: Basic catuser:abcd1234
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 2
+}
+
+
+
+
+############################################################################
+############################################################################
+## ADMIN SERVICE
+############################################################################
+############################################################################
+
+###
+GET {{baseUrl}}/admin/Books
+Authorization: Basic catuser:abcd1234
+
+
+###
+GET {{baseUrl}}/admin/Books
+Authorization: Basic adminuser:abcd1234
+
+
+###
+POST {{baseUrl}}/admin/Authors
+Authorization: Basic catuser:abcd1234
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1805-05-09",
+  "epoch": {"ID": 120}
+}
+
+
+###
+POST {{baseUrl}}/admin/Authors
+Authorization: Basic adminuser:abcd1234
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1805-05-09",
+  "epoch": {"ID": 120}
+}
+
+
+
+###
+# Read the ID of a book without stock
+# @name getBookWithoutStock
+GET {{baseUrl}}/admin/Books?$filter=stock eq 0&$top=1&$select=ID
+Authorization: Basic adminuser:abcd1234
+
+### Assign the received ID to the variable ID1
+@ID1 = {{getBookWithoutStock.response.body.$.value[0].ID}}
+
+
+###
+# @name getETag1
+GET {{baseUrl}}/admin/Books({{ID1}})
+Authorization: Basic adminuser:abcd1234
+
+### Assign the received ETag to the variable ETag1
+@ETag1 = {{getETag1.response.headers.ETag}}
+
+
+###
+DELETE {{baseUrl}}/admin/Books({{ID1}})
+If-Match: {{ETag1}}
+Authorization: Basic adminuser:abcd1234
+
+
+
+
+###
+# Read the ID of a book with stock
+# @name getBookWithStock
+GET {{baseUrl}}/admin/Books?$filter=stock gt 0&$top=1&$select=ID
+Authorization: Basic adminuser:abcd1234
+
+### Assign the received ID to the variable ID2
+@ID2 = {{getBookWithStock.response.body.$.value[0].ID}}
+
+
+###
+# @name getETag2
+GET {{baseUrl}}/admin/Books({{ID2}})
+Authorization: Basic adminuser:abcd1234
+
+### Assign the received ETag to the variable ETag2
+@ETag2 = {{getETag2.response.headers.ETag}}
+
+
+###
+DELETE {{baseUrl}}/admin/Books({{ID2}})
+If-Match: {{ETag2}}
+Authorization: Basic adminuser:abcd1234

@@ -1,4 +1,4 @@
-# CAP my-bookshop
+# CAP tmp
 _out
 *.db
 *.sqlite
@@ -25,10 +25,3 @@ mta_archives/
 
 *.iml
 *.flattened-pom.xml
-
-# IDEs
-# .vscode
-# .idea
-
-# @cap-js/cds-typer
-@cds-models

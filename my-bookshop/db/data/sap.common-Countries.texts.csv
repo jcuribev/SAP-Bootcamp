@@ -1,1 +1,8 @@
-code,locale,name,descr
+locale,code,name,descr
+es,ES,Alemania,
+es,FR,Francia,
+es,IT,Italia,
+es,JP,Japón,
+es,US,Estados Unidos,
+es,GB,Reino Unido,
+es,CO,Colombia,

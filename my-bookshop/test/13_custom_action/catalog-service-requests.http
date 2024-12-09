@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:4004
+
+
+
+### 
+GET {{baseUrl}}/cat/$metadata
+
+
+
+### 
+# @name getBookID
+GET {{baseUrl}}/cat/Books?$filter=title eq 'Faust'
+
+###
+
+@bookID = {{getBookID.response.body.$.value[0].ID}}
+
+POST {{baseUrl}}/cat/submitOrder
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 2
+}
+
+
+
+### 
+POST {{baseUrl}}/cat/submitOrder
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 0
+}

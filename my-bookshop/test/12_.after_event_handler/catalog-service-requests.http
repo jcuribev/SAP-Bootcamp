@@ -1,0 +1,6 @@
+@baseUrl = http://localhost:4004
+
+
+
+###
+GET {{baseUrl}}/cat/Books

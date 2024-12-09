@@ -1,0 +1,108 @@
+@baseUrl = http://localhost:4004
+
+
+###
+# @name getBookID
+GET {{baseUrl}}/cat/Books?$filter=title eq 'Faust'
+
+###
+
+@bookID = {{getBookID.response.body.$.value[0].ID}}
+
+
+
+### 
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: en
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 0
+}
+
+###
+
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: de
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 0
+}
+
+
+
+### 
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: en
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 999999
+}
+
+###
+
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: de
+Content-Type: application/json
+
+{
+  "book": "{{bookID}}",
+  "quantity": 999999
+}
+
+
+
+### 
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: en
+Content-Type: application/json
+
+{
+  "book": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "quantity": 2
+}
+
+###
+
+POST {{baseUrl}}/cat/submitOrder
+Accept-Language: de
+Content-Type: application/json
+
+{
+  "book": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "quantity": 2
+}
+
+
+
+
+
+###
+POST {{baseUrl}}/admin/Authors
+Accept-Language: en   
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1705-05-09", 
+  "epoch": {"ID": 120}
+}
+
+###
+
+POST {{baseUrl}}/admin/Authors
+Accept-Language: de 
+Content-Type: application/json
+
+{
+  "name": "Friedrich Schiller",
+  "dateOfBirth": "1759-11-10",
+  "dateOfDeath": "1705-05-09", 
+  "epoch": {"ID": 120}
+}
