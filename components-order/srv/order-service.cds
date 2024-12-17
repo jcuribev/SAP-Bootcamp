@@ -28,8 +28,7 @@ service OrderService @(path: '/order-service') {
   entity ExternalCustomer as
     projection on external.A_Customer {
       Customer,
-      CustomerName,
-
+      CustomerName
     }
 
   action   createOrder(customer : fab.Customers:name,
