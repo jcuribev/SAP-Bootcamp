@@ -5,6 +5,8 @@ using {
   managed
 } from '@sap/cds/common';
 
+using {API_BUSINESS_PARTNER.A_Customer} from '../srv/external/API_BUSINESS_PARTNER';
+
 type OrderStatus   : String enum {
   OPEN;
   DELIVERED;
@@ -64,12 +66,12 @@ entity Orders : managed {
 
 
 entity Customers {
-  key ID      : UUID;
-      name    : String(100) @mandatory;
-      address : String(200) @mandatory;
-      order   : Association to many Orders
-                  on order.customer = $self;
-
+  key ID                   : UUID;
+      name                 : String(100) @mandatory;
+      address              : String(200) @mandatory;
+      order                : Association to many Orders
+                               on order.customer = $self;
+      businessCostumerName : Association to A_Customer;
 }
 
 entity Invoices : managed {
