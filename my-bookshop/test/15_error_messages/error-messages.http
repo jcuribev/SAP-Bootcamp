@@ -15,6 +15,7 @@ GET {{baseUrl}}/cat/Books?$filter=title eq 'Faust'
 POST {{baseUrl}}/cat/submitOrder
 Accept-Language: en
 Content-Type: application/json
+Authorization: Basic catuser:abcd1234
 
 {
   "book": "{{bookID}}",

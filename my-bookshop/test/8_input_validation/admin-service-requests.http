@@ -17,11 +17,12 @@ Content-Type: application/json
 ###
 POST {{baseUrl}}/admin/Books
 Content-Type: application/json
+Authorization: Basic adminuser:abcd1234
 
 {
-  "title": "",
+  "title": "asdasd",
   "author_ID": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-  "genre": 3
+  "genre": 2
 }
 
 

@@ -16,6 +16,7 @@ GET {{baseUrl}}/cat/Books?$filter=title eq 'Faust'
 @bookID = {{getBookID.response.body.$.value[0].ID}}
 
 POST {{baseUrl}}/cat/submitOrder
+Authorization: Basic catuser:abcd1234
 Content-Type: application/json
 
 {

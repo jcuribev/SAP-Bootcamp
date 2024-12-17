@@ -10,7 +10,7 @@ class CatalogService extends cds.ApplicationService {
 
     return super.init()
   }
-
+  z
   grantDiscount(results) {
     for (let b of results) {
       if (b.stock > 200) {
@@ -20,6 +20,8 @@ class CatalogService extends cds.ApplicationService {
   }
 
   async reduceStock(req) {
+    console.log('holaaaaaaaaaaaaaaaaaaaaa')
+    console.log('req', req)
     const { Books } = this.entities
     const { book, quantity } = req.data
 

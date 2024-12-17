@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:4004
+
+###
+GET {{baseUrl}}/order-service/Orders(c0263a12-d148-472c-a794-35b3573969f5)
+
+###
+# @name createOrder
+POST {{baseUrl}}/order-service/createOrder
+Content-Type: application/json
+
+{
+  "customer": "Pepito",
+  "items": [
+    {
+      "product": "26e467ac-b8d1-4777-b634-587130e4d82f",
+      "quantity": "2"
+    },
+    {
+      "product": "29f332f4-4a7a-4b93-b2bc-074ef0400cf6",
+      "quantity": "2"
+    }
+  ]
+}

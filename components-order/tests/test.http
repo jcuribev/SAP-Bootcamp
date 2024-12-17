@@ -1,0 +1,58 @@
+POST http://localhost:4004/order-service/createOrder
+Content-Type: application/json
+
+{
+  "orderID": "hola"
+}
+
+###
+GET http://localhost:4004/order-service
+Content-Type: application/json
+
+###
+POST http://localhost:4004/support-service/openTicket
+Content-Type: application/json
+
+###
+GET http://localhost:4004/support-service/SupportTickets
+Content-Type: application/json
+
+###
+POST http://localhost:4004/order-service/Orders
+Content-Type: application/json
+Authorization: Basic pepito:customer
+
+{
+  "ID": "1",
+  "items": [
+    {
+      "ID": "3",
+      "description": "First item of the order",
+      "product": {
+        "ID": "101"
+      }
+    },
+    {
+      "ID": "4",
+      "description": "Second item of the order",
+      "product": {
+        "ID": "102"
+      }
+    }
+  ]
+}
+
+
+###
+GET http://localhost:4004/order-service/fetchBusinessPartners
+Content-Type: application/json
+
+###
+POST http://localhost:4004/order-service/fetchEntityData
+Content-Type: application/json
+
+{
+  "entitySetName": "A_BusinessPartner"
+}
+
+
