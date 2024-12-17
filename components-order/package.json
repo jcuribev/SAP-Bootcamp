@@ -10,11 +10,13 @@
     "@sap/cds-hana": "^2.0.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
-    "express": "^4"
+    "express": "^4",
+    "@sap/xssec": "^4"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.7.0",
-    "@cap-js/sqlite": "^1.7.7"
+    "@cap-js/sqlite": "^1.7.7",
+    "@sap/cds-dk": "^8"
   },
   "scripts": {
     "start": "cds-serve"
@@ -30,7 +32,7 @@
         }
       },
       "auth": {
-        "kind": "mocked",
+        "kind": "xsuaa",
         "users": {
           "admin": {
             "password": "admin",
